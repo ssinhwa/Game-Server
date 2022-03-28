@@ -1,0 +1,51 @@
+spring:
+  profiles:
+    active: dev
+    group:
+      dev:
+        - dev
+      prod:
+        - prod
+
+# 개발용
+---
+# MYSQL 설정
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    database: mysql
+    generate-ddl: true
+
+# 상훈 요청으로 포트 55443으로 열기
+server:
+  port: 55443
+
+
+# 배포용
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: dbc:mysql://localhost:3306/springtest?serverTimezone=Asia/Seoul
+    username: root
+    password: <password>
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
