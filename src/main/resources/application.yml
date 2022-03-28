@@ -41,9 +41,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: dbc:mysql://localhost:3306/springtest?serverTimezone=Asia/Seoul
-    username: root
-    password: <password>
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
 
   jpa:
     show-sql: false
