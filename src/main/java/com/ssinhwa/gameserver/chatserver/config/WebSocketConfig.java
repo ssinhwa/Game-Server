@@ -1,4 +1,4 @@
-package com.ssinhwa.gameserver.config;
+package com.ssinhwa.gameserver.chatserver.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
