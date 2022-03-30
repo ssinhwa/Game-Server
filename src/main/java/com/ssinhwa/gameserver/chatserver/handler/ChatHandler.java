@@ -1,15 +1,8 @@
 package com.ssinhwa.gameserver.chatserver.handler;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssinhwa.gameserver.chatserver.dto.ChatRoomDto;
-import com.ssinhwa.gameserver.chatserver.dto.MessageDto;
-import com.ssinhwa.gameserver.chatserver.service.ChatService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
-import org.springframework.web.socket.handler.TextWebSocketHandler;
+/*
+
+STOMP 에서는 필요 없으므로 삭제.
 
 @Component
 @Slf4j
@@ -30,8 +23,11 @@ public class ChatHandler extends TextWebSocketHandler {
     }
 }
 
-// 1. 오브젝트 Mapper 가 Payload 를 읽어서 MessageDto 로 변환.
-// 2. ChatRoomDto 에서 세션별로 메세지 보낸다.
-// 3. 최종적으로 ChatService 에서 Session class 통해서 메세지 보냄.
+// 1. Controller 에서 요청을 받으면 함수 호출. 우리는 ChatController -> Service 로 가게 된다.
+// 2. 오브젝트 Mapper 가 Payload 를 읽어서 MessageDto 로 변환.
+// 3. ChatRoomDto 에서 세션별로 메세지 보낸다.
+// 4. 최종적으로 ChatService 에서 Session class 통해서 메세지 보냄.
 
 // 출처 : https://daddyprogrammer.org/post/4691/spring-websocket-chatting-server-stomp-server/
+
+ */

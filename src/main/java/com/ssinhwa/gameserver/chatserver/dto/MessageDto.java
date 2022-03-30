@@ -11,4 +11,8 @@ public class MessageDto {
     private String roomId;
     private String sender;
     private String message;
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
