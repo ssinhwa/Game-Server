@@ -1,24 +1,24 @@
 package com.ssinhwa.gameserver.chatserver.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.UUID;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class ChatRoom {
     @GeneratedValue
     @Id
     private Long id;
-
     private String roomId;
     private String roomName;
 
-    public void createChatRoom(String roomName) {
-        this.roomId = UUID.randomUUID().toString();
+    public ChatRoom(String roomId, String roomName) {
+        this.roomId = roomId;
         this.roomName = roomName;
     }
 

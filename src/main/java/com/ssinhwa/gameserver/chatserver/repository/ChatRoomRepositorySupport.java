@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
 @Slf4j
 @RequiredArgsConstructor
@@ -12,9 +14,8 @@ public class ChatRoomRepositorySupport {
 
     public ChatRoom createChatRoom(String name) {
         log.info("Create Chat Room");
-        ChatRoom newChatRoom = new ChatRoom();
-        newChatRoom.createChatRoom(name);
-        return newChatRoom;
+        String roomId = UUID.randomUUID().toString();
+        return new ChatRoom(roomId, name);
     }
 
     /*

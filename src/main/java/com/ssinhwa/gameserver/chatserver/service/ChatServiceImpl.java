@@ -5,6 +5,7 @@ import com.ssinhwa.gameserver.chatserver.entity.ChatRoom;
 import com.ssinhwa.gameserver.chatserver.repository.ChatRoomRepository;
 import com.ssinhwa.gameserver.chatserver.repository.ChatRoomRepositorySupport;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class ChatServiceImpl implements ChatService {
 
     private final ChatRoomRepository chatRoomRepository;
     private final ChatRoomRepositorySupport chatRoomRepositorySupport;
+
     private final ModelMapper modelMapper;
 
     @Override
@@ -43,6 +46,8 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public ChatRoomDto createChatRoom(String name) {
         ChatRoom chatRoom = chatRoomRepositorySupport.createChatRoom(name);
-        return modelMapper.map(chatRoom, ChatRoomDto.class);
+        chatRoomRepository.save(chatRoom);
+        ChatRoomDto dto = modelMapper.map(chatRoom, ChatRoomDto.class);
+        return dto;
     }
 }

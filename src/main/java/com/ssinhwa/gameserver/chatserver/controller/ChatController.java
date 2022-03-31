@@ -4,12 +4,12 @@ import com.ssinhwa.gameserver.chatserver.dto.MessageDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 
 // Publisher 구현
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class ChatController {
 
@@ -19,18 +19,4 @@ public class ChatController {
     public void message(MessageDto message) {
         messagingTemplate.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
     }
-
-    /*
-    private final ChatService chatService;
-
-    @PostMapping
-    public ChatRoomDto createRoom(@RequestParam String name) {
-        return chatService.createChatRoomDto(name);
-    }
-
-    @GetMapping
-    public List<ChatRoomDto> findAllRoom() {
-        return chatService.findAllRoom();
-    }
-     */
 }
