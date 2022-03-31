@@ -31,6 +31,9 @@ dependencies {
 
     // For JSON
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2.1'
+
+    // Model mapper
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.0.0'
 }
 
 tasks.named('test') {
