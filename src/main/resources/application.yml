@@ -26,6 +26,9 @@ spring:
       ddl-auto: create-drop
     database: mysql
     generate-ddl: true
+      
+  thymeleaf:
+    cache: false
 
   # 상훈 요청으로 포트 55443으로 열기
   #server:

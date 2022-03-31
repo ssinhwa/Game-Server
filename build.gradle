@@ -34,6 +34,10 @@ dependencies {
 
     // Model mapper
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.0.0'
+
+    // Thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
 }
 
 tasks.named('test') {
