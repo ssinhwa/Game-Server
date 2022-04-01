@@ -26,13 +26,24 @@ spring:
       ddl-auto: create-drop
     database: mysql
     generate-ddl: true
-      
+
   thymeleaf:
     cache: false
 
-  # 상훈 요청으로 포트 55443으로 열기
-  #server:
-  #port: 55443
+  kafka:
+    consumer:
+      group-id: test-1
+      enable-auto-commit: true
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.JsonDeserializer
+      max-poll-records: 1000
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.JsonSerializer
+    template:
+      default-topic: test
+    bootstrap-servers: localhost:9092
 
 
 # 배포용
