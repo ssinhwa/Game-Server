@@ -28,7 +28,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-
+    testImplementation("org.springframework.kafka:spring-kafka-test")
     // For JSON
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2.1'
 
@@ -38,6 +38,10 @@ dependencies {
     // Thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
+
+    // Kafka
+    implementation("org.springframework.kafka:spring-kafka")
+
 }
 
 tasks.named('test') {
