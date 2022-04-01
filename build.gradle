@@ -42,6 +42,8 @@ dependencies {
     // Kafka
     implementation("org.springframework.kafka:spring-kafka")
 
+    // 1. Use Guava in your implementation only:
+    implementation("com.google.guava:guava:31.1-jre")
 }
 
 tasks.named('test') {
