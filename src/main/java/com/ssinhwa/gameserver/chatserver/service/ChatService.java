@@ -1,37 +1,18 @@
 package com.ssinhwa.gameserver.chatserver.service;
 
-/*
-@Service
-@Slf4j
-@RequiredArgsConstructor
+import com.ssinhwa.gameserver.chatserver.dto.ChatRoomDto;
+import com.ssinhwa.gameserver.chatserver.dto.MessageDto;
 
-public class ChatService {
+import java.util.List;
 
-    private final ObjectMapper objectMapper;
-    private final Map<String, ChatRoomDto> chatRooms;
+public interface ChatService {
+    public List<ChatRoomDto> findAll();
 
-    public List<ChatRoomDto> findAllRoom() {
-        return new ArrayList<>(chatRooms.values());
-    }
+    public ChatRoomDto findChatRoomById(Long id);
 
-    public ChatRoomDto findChatRoomDtoById(String roomId) {
-        return chatRooms.get(roomId);
-    }
+    public ChatRoomDto findChatRoomByRoomId(String roomId);
 
-    public ChatRoomDto createChatRoomDto(String name) {
-        String roomId = UUID.randomUUID().toString();
-        ChatRoomDto newChatRoom = new ChatRoomDto(name);
-        chatRooms.put(roomId, newChatRoom);
-        return newChatRoom;
-    }
+    public ChatRoomDto createChatRoom(String name);
 
-    public void sendMessage(WebSocketSession session, MessageDto messageDto) {
-        try {
-            log.info("서비스에서 메세지 보냄");
-            session.sendMessage(new TextMessage(objectMapper.writeValueAsString(messageDto)));
-        } catch (IOException e) {
-            log.error(e.getMessage(), e);
-        }
-    }
+    public void saveMessage(MessageDto message);
 }
-*/

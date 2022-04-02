@@ -28,9 +28,22 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-
+    testImplementation("org.springframework.kafka:spring-kafka-test")
     // For JSON
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2.1'
+
+    // Model mapper
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.0.0'
+
+    // Thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
+
+    // Kafka
+    implementation("org.springframework.kafka:spring-kafka")
+
+    // 1. Use Guava in your implementation only:
+    implementation("com.google.guava:guava:31.1-jre")
 }
 
 tasks.named('test') {

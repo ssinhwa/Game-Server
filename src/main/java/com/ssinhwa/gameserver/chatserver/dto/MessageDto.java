@@ -1,15 +1,17 @@
 package com.ssinhwa.gameserver.chatserver.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.io.Serializable;
 
 @Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class MessageDto {
+public class MessageDto implements Serializable {
     private String roomId;
-    private String sender;
+    private String writer;
     private String message;
 
     public void setMessage(String message) {

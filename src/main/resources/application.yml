@@ -27,9 +27,13 @@ spring:
     database: mysql
     generate-ddl: true
 
-  # 상훈 요청으로 포트 55443으로 열기
-  #server:
-  #port: 55443
+  thymeleaf:
+    cache: false
+
+  kafka:
+    consumer:
+      enable-auto-commit: true
+      max-poll-records: 1000
 
 
 # 배포용
