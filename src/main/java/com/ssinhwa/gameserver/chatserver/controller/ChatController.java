@@ -39,8 +39,9 @@ public class ChatController {
         }
     }
 
+    @PostMapping("/message")
     @MessageMapping("/message")
-    public void message(MessageDto message) {
+    public void message(@RequestBody MessageDto message) {
         log.info(message.getMessage());
         chatMessageHistoryRepository.save(message);
         kafkaProducer.send(KafkaConstants.KAFKA_TOPIC, message);
