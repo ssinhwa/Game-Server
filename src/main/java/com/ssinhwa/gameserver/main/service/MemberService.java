@@ -7,6 +7,4 @@ import org.springframework.stereotype.Service;
 public interface MemberService {
     public void signUp(UserDto userDto);
 
-    public void login(String username, String password) throws Exception;
-
 }

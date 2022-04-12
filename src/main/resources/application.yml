@@ -48,6 +48,8 @@ spring:
           starttls:
             eanble: true
 
+jwt:
+  secret: mythologyteamtest
 
 # 배포용
 ---

@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers()
                 .and()
                 .formLogin()
+                .loginProcessingUrl("/api/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .and()

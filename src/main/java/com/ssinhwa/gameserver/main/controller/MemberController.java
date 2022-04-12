@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-public class UserController {
+public class MemberController {
 
     private final MemberServiceImpl memberService;
 
@@ -21,14 +21,5 @@ public class UserController {
         return "Sign Up Success";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestBody String username,
-                        @RequestBody String password) {
-        try {
-            memberService.login(username, password);
-            return "Login Success";
-        } catch (Exception e) {
-            return e.getMessage();
-        }
-    }
+
 }

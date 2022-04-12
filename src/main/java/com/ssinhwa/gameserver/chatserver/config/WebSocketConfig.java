@@ -1,6 +1,9 @@
 package com.ssinhwa.gameserver.chatserver.config;
 
+import com.ssinhwa.gameserver.chatserver.controller.StompHandler;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
@@ -9,7 +12,10 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @Configuration
 // @EnableWebSocket
 @EnableWebSocketMessageBroker
+@RequiredArgsConstructor
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+
+    private final StompHandler stompHandler;
 
     // 메시지 발행 요청 : /pub (Application Destination Prefix)
     // 메시지 구독 요청 : /sub (enable Simple Broker)
@@ -25,6 +31,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws-chat")
                 .setAllowedOrigins("*");
+    }
+
+    // StompHandler 가 WebSocket 앞단에서 Token 체크
+    @Override
+    public void configureClientInboundChannel(ChannelRegistration registration) {
+        registration.interceptors(stompHandler);
     }
 
     /*
