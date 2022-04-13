@@ -1,20 +1,24 @@
 package com.ssinhwa.gameserver.main.entity;
 
-import com.ssinhwa.gameserver.main.dto.Role;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    private String id;
 
     @Column(nullable = false, length = 20, unique = true)
     private String username;
@@ -27,14 +31,11 @@ public class Member {
 
     private String playerName;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
     @ColumnDefault("False")
     private boolean emailVerified;
 
-    @ColumnDefault("False")
-    private boolean locked;
+    private String token;
+
 
     public Member(String username, String password, String email) {
         this.username = username;
@@ -42,11 +43,19 @@ public class Member {
         this.email = email;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public void setPassword(String password) {
+    public void changePassword(String password) {
         this.password = password;
+    }
+
+    public void changeEmailVerified(boolean emailVerified) {
+        this.emailVerified = emailVerified;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 }

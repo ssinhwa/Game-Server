@@ -33,7 +33,7 @@ spring:
   redis:
     host: localhost
     port: 6379
-      
+
   kafka:
     consumer:
       enable-auto-commit: true
@@ -47,10 +47,10 @@ spring:
     properties:
       mail:
         smtp:
-          socketFactory.class: javax.net.ssl.SSLSocketFactory
-          auth: true
           starttls:
-            eanble: true
+            enable: true
+          auth: true
+
 
 jwt:
   secret: mythologyteamtest
