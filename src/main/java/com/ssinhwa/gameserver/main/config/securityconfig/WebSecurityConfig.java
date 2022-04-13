@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/chat/**").hasRole("USER")
+                //.antMatchers("/chat/**").hasRole("USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll();
 
