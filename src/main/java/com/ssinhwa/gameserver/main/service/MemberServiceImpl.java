@@ -4,6 +4,7 @@ import com.ssinhwa.gameserver.main.dto.LoginDto;
 import com.ssinhwa.gameserver.main.dto.UserDto;
 import com.ssinhwa.gameserver.main.entity.EmailToken;
 import com.ssinhwa.gameserver.main.entity.Member;
+import com.ssinhwa.gameserver.main.jwt.TokenProvider;
 import com.ssinhwa.gameserver.main.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailTokenService emailTokenService;
+    private final TokenProvider tokenProvider;
 
     @Transactional(readOnly = true)
     public UserDto findMemberByUsername(String username) {
@@ -66,6 +68,11 @@ public class MemberServiceImpl implements MemberService {
         if (!member.isEmailVerified()) {
             throw new EntityNotFoundException("이메일 인증이 완료되지 않았습니다.");
         }
+
+        String token = tokenProvider.generateToken(member.getUsername());  // 토큰 생성해서 저장
+        log.info("Token : " + token);
+        member.setToken(token);
+        memberRepository.save(member);
     }
 
 }
