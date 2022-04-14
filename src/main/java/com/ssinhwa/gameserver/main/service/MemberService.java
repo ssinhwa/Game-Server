@@ -12,5 +12,7 @@ public interface MemberService {
 
     public UserDto findMemberByUsername(String username);
 
+    public void logout(String token);
+
     public void confirmEmail(String token);
 }

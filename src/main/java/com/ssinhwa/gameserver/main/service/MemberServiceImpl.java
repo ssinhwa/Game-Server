@@ -1,5 +1,6 @@
 package com.ssinhwa.gameserver.main.service;
 
+import com.ssinhwa.gameserver.chatserver.service.RedisService;
 import com.ssinhwa.gameserver.main.dto.LoginDto;
 import com.ssinhwa.gameserver.main.dto.UserDto;
 import com.ssinhwa.gameserver.main.entity.EmailToken;
@@ -23,11 +24,17 @@ public class MemberServiceImpl implements MemberService {
     private final PasswordEncoder passwordEncoder;
     private final EmailTokenService emailTokenService;
     private final TokenProvider tokenProvider;
+    private final RedisService redisService;
 
     @Transactional(readOnly = true)
     public UserDto findMemberByUsername(String username) {
         Member member = memberRepository.findMemberByUsername(username);
         return new UserDto(member.getUsername(), member.getPassword(), member.getEmail());
+    }
+
+    @Override
+    public void logout(String token) {
+        redisService.delToken(token);   // 토큰 삭제
     }
 
     @Override
@@ -50,7 +57,6 @@ public class MemberServiceImpl implements MemberService {
         String password = passwordEncoder.encode(userDto.getPassword());
         Member member = new Member(userDto.getUsername(), password, userDto.getEmail());
         memberRepository.save(member);
-
         emailTokenService.createEmailConfirmationToken(member.getId(), userDto.getEmail());
     }
 
@@ -71,8 +77,8 @@ public class MemberServiceImpl implements MemberService {
 
         String token = tokenProvider.generateToken(member.getUsername());  // 토큰 생성해서 저장
         log.info("Token : " + token);
-        member.setToken(token);
-        memberRepository.save(member);
+        redisService.setToken(token, member.getUsername()); // Redis 에 토큰 저장
     }
+
 
 }

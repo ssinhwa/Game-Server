@@ -39,4 +39,10 @@ public class MemberController {
         }
         return "로그인 성공";
     }
+
+    @PostMapping("/logout")
+    public String logout(@RequestParam String token) {
+        memberService.logout(token);
+        return "로그아웃 성공";
+    }
 }
