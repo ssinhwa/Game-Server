@@ -16,17 +16,18 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 
 // Publisher 구현
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @Slf4j
 public class ChatController {
@@ -63,8 +64,15 @@ public class ChatController {
     }
 
     @GetMapping("/history")
+    @ResponseBody
     public List<MessageDto> getMessageHistory() {
         log.info("history 호출");
         return chatMessageHistoryRepository.get();
+    }
+
+    @GetMapping("/chat")
+    public String getChat() {
+        log.info("@ChatController");
+        return "chat";
     }
 }

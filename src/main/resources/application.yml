@@ -50,15 +50,9 @@ spring:
           starttls:
             enable: true
           auth: true
-  devtools:
-    livereload:
-      enabled: true
-    restart:
-      enabled: false
-  freemarker:
-    cache: false
 
-
+  mustache:
+    suffix: .html
 jwt:
   secret: mythologyteamtest
 
