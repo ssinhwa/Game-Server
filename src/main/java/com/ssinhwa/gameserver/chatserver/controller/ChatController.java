@@ -54,6 +54,7 @@ public class ChatController {
     @MessageMapping("/chat/message")
     public void message(@RequestBody MessageDto message, @Header("token") String token) {
         String username = tokenProvider.getUserNameFromJwt(token);
+        log.info("WebSocket Username : " + username);
         log.info(message.getMessage());
         chatMessageHistoryRepository.save(message);
         redisMessageListenerContainer.addMessageListener(redisSubscriber, new ChannelTopic(RedisConstants.REDIS_TOPIC));

@@ -9,49 +9,39 @@ import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class TokenProvider {
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000L * 60;   // 유효시간은 1분
+    private static final long TOKEN_EXPIRE_TIME = 1000L * 60;   // 유효시간은 1분
 
-    private static final String AUTHORITIES_KEY = "auth";
     @Value("${jwt.secret}")
     private String secretKey;
 
     // 이름으로 JWT Token 생성
-    public String generateToken(Authentication authentication) {
+    public String generateToken(String username) {
 
-        String authorities = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
 
-        long now = (new Date()).getTime();
+        Date nowDate = new Date();
+        long now = nowDate.getTime();
 
-        Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
+        Date TokenExpiresIn = new Date(now + TOKEN_EXPIRE_TIME);
 
         return Jwts.builder()
-                .setId(authentication.getName())    // "Id" : "name"
-                .claim(AUTHORITIES_KEY, authorities)    // "auth" : "ROLE_USER"
-                .setExpiration(accessTokenExpiresIn)    // "exp" : "123123~"
+                .setId(username)    // "Id" : "name"
+                .setIssuedAt(nowDate)   // 토큰 발행 일자
+                .setExpiration(TokenExpiresIn)    // "exp" : "123123~"
                 .signWith(SignatureAlgorithm.HS256, secretKey)  // "alg" : "HS256"
                 .compact();
-
     }
 
     // 복호화 하여 username 얻는다.
     public String getUserNameFromJwt(String jwt) {
         Claims claim = getClaims(jwt);
-        if (claim.get(AUTHORITIES_KEY) == null) {
-            throw new RuntimeException("권한 정보가 없는 토큰입니다.");
-        }
         return claim.getId();
     }
 

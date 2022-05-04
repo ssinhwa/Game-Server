@@ -16,13 +16,12 @@ public class MemberController {
 
     @PostMapping("/signup")
     public String signUp(@RequestBody UserDto userDto) {
-        memberService.signUp(userDto);
+        try {
+            memberService.signUp(userDto);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
         return "Sign Up Success";
-    }
-
-    @GetMapping("/login/success")
-    public String success() {
-        return "login Success";
     }
 
     @GetMapping("confirm-email")
@@ -33,12 +32,17 @@ public class MemberController {
 
     @PostMapping("/login")
     public String login(@RequestBody LoginDto loginDto) {
-        memberService.login(loginDto);
+        try {
+            memberService.login(loginDto);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
         return "로그인 성공";
     }
 
-    @GetMapping("/login/fail")
-    public String fail() {
-        return "login fail";
+    @PostMapping("/logout")
+    public String logout(@RequestParam String token) {
+        memberService.logout(token);
+        return "로그아웃 성공";
     }
 }
