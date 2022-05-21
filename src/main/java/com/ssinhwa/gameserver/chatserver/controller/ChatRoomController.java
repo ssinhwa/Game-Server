@@ -19,9 +19,7 @@ public class ChatRoomController {
 
     @GetMapping("/room")
     public void getRoom(String roomId, Model model) {
-
-        log.info("# get Chat Room, roomID : " + roomId);
-
+        log.info("Chat Room, roomID : " + roomId);
         model.addAttribute("room", chatService.findChatRoomByRoomId(roomId));
     }
 
