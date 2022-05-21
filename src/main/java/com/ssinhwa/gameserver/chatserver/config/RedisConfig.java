@@ -12,6 +12,8 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import static com.ssinhwa.gameserver.chatserver.config.RedisConstants.REDIS_TOPIC;
+
 @Configuration
 public class RedisConfig {
 
@@ -57,6 +59,6 @@ public class RedisConfig {
 
     @Bean
     ChannelTopic topic() {
-        return new ChannelTopic("tt");
+        return new ChannelTopic(REDIS_TOPIC);
     }
 }

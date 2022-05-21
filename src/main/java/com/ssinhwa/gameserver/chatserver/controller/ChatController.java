@@ -11,20 +11,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 // Publisher 구현
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @Slf4j
 public class ChatController {
@@ -46,11 +41,12 @@ public class ChatController {
 //        } catch (Exception e) {
 //            throw new RuntimeException(e);
 //        }
+        redisPublisher.publish(new ChannelTopic(RedisConstants.REDIS_TOPIC), messageDto);
     }
 
     @PostMapping("/chat/message")
     @MessageMapping("/chat/message")
-    public void message(@RequestBody MessageDto message, @Header("token") String token) {
+    public void message(@RequestBody MessageDto message, @CookieValue("token") String token) {
         String username = tokenProvider.getUserNameFromJwt(token);
         log.info("WebSocket Username : " + username);
         log.info(message.getMessage());
@@ -67,9 +63,4 @@ public class ChatController {
         return chatMessageHistoryRepository.get();
     }
 
-    @GetMapping("/chat")
-    public String getChat() {
-        log.info("@ChatController");
-        return "chat";
-    }
 }

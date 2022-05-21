@@ -1,8 +1,10 @@
 package com.ssinhwa.gameserver.chatserver.repository;
 
+import com.ssinhwa.gameserver.chatserver.config.RedisConstants;
 import com.ssinhwa.gameserver.chatserver.entity.ChatRoom;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -16,6 +18,11 @@ public class ChatRoomRepositorySupport {
         log.info("Create Chat Room");
         String roomId = UUID.randomUUID().toString();
         return new ChatRoom(roomId, name);
+    }
+
+    public void enterChatRoom(String roomId) {
+        ChannelTopic channelTopic = new ChannelTopic(RedisConstants.REDIS_TOPIC);
+
     }
 
     /*

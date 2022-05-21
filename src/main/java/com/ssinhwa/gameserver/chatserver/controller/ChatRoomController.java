@@ -42,9 +42,7 @@ public class ChatRoomController {
     @GetMapping("/room/{roomId}")
     public String roomDetail(Model model, @PathVariable String roomId) {
         ChatRoomDto chatRoomDto = chatService.findChatRoomByRoomId(roomId);
-        model.addAttribute("room", chatRoomDto);
-        model.addAttribute("member", "member" + 2);
-        return "/chat/room";
+        return chatRoomDto.getRoomName();
     }
 
 }

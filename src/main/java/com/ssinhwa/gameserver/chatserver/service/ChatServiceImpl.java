@@ -36,12 +36,6 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public ChatRoomDto findChatRoomById(Long id) {
-        ChatRoom chatRoom = chatRoomRepository.findChatRoomById(id);
-        return modelMapper.map(chatRoom, ChatRoomDto.class);
-    }
-
-    @Override
     public ChatRoomDto findChatRoomByRoomId(String roomId) {
         ChatRoom chatRoom = chatRoomRepository.findChatRoomByRoomId(roomId);
         return modelMapper.map(chatRoom, ChatRoomDto.class);
