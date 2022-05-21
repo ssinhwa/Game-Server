@@ -21,16 +21,17 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     // 메시지 구독 요청 : /sub (enable Simple Broker)
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/topic");
-        registry.setApplicationDestinationPrefixes("/kafka");
+        registry.enableSimpleBroker("/sub");
+        registry.setApplicationDestinationPrefixes("/pub");
     }
 
     // Stomp WebSocket Endpoint : /ws/stomp
     // Unity 에서 접속하려 하니 SockJS 를 빼야 했다.
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws-chat")
-                .setAllowedOrigins("*");
+        registry.addEndpoint("/ws-stomp")
+                .setAllowedOriginPatterns("*")
+                .withSockJS();
     }
 
     // StompHandler 가 WebSocket 앞단에서 Token 체크

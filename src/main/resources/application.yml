@@ -33,11 +33,6 @@ spring:
   redis:
     host: localhost
     port: 6379
-
-  kafka:
-    consumer:
-      enable-auto-commit: true
-      max-poll-records: 1000
   
   mail:
     host: smtp.gmail.com
@@ -50,15 +45,9 @@ spring:
           starttls:
             enable: true
           auth: true
-  devtools:
-    livereload:
-      enabled: true
-    restart:
-      enabled: false
-  freemarker:
-    cache: false
 
-
+  mustache:
+    suffix: .html
 jwt:
   secret: mythologyteamtest
 
@@ -85,11 +74,6 @@ spring:
   redis:
     host: localhost
     port: 6379
-
-  kafka:
-    consumer:
-      enable-auto-commit: true
-      max-poll-records: 1000
 
   mail:
     host: smtp.gmail.com
