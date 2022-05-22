@@ -6,7 +6,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.prod
-    command: java -jar -Dspring.profiles.active=dev
+    command: java -jar -Dspring.profiles.active=prod
     env_file:
       - .env
     volumes:

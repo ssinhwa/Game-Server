@@ -25,6 +25,7 @@ spring:
     hibernate:
       ddl-auto: create-drop
     database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true
 
   thymeleaf:
@@ -69,10 +70,11 @@ spring:
     hibernate:
       ddl-auto: validate
     database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true
 
   redis:
-    host: localhost
+    host: ${HOST}
     port: 6379
 
   mail:
@@ -88,4 +90,4 @@ spring:
           auth: true
 
   jwt:
-    secret: mythologyteamtests
+    secret: mythologyteamprod
