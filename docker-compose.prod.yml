@@ -6,7 +6,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.prod
-    command: java -jar -Dspring.profiles.active=dev
+    command: java -jar -Dspring.profiles.active=prod
     env_file:
       - .env
     volumes:
@@ -27,6 +27,27 @@ services:
       - "80:80"
     depends_on:
       - web
+
+  redis:
+    image: redis
+    container_name: redis
+    hostname: redis
+    labels:
+      - "name=redis"
+      - "mode=standalone"
+    ports:
+      - "6379:6379"
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander
+    environment:
+      - REDIS_HOSTS=redis
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
 
 volumes:
   static:
