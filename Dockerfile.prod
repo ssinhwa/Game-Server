@@ -16,7 +16,7 @@ RUN ./gradlew build -x test
 
 # BASE IMAGE
 FROM openjdk:11-jre-slim
-COPY --from=Builder build/libs/gameserver*.jar app.jar
+COPY --from=Builder build/libs/*.jar app.jar
 
 EXPOSE 8080
 RUN chmod +x app.jar

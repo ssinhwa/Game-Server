@@ -89,5 +89,5 @@ spring:
             enable: true
           auth: true
 
-  jwt:
-    secret: mythologyteamprod
+jwt:
+  secret: mythologyteamprod
