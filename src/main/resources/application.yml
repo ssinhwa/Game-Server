@@ -52,6 +52,9 @@ spring:
 jwt:
   secret: mythologyteamtest
 
+email:
+  host: localhost:8080
+
 # 배포용
 ---
 spring:

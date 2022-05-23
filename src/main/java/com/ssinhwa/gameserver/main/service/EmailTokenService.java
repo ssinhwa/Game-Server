@@ -20,8 +20,9 @@ public class EmailTokenService {
 
     private final EmailSenderService emailSenderService;
     private final EmailTokenRepository emailTokenRepository;
-    @Value("${jwt.secret}")
-    private final String email;
+
+    @Value("${email.host}")
+    private String emailLink;
 
     public void createEmailConfirmationToken(String userId, String email) {
         EmailToken emailToken = new EmailToken(userId);
@@ -30,7 +31,7 @@ public class EmailTokenService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(email);
         mailMessage.setSubject("이메일 인증 요청 안내 메일입니다.");
-        mailMessage.setText("http://" + email + "/api/confirm-email?token=" + emailToken.getId());
+        mailMessage.setText("http://" + emailLink + "/api/confirm-email?token=" + emailToken.getId());
 
         emailSenderService.sendEmail(mailMessage);
         log.info("이메일 전송 : " + mailMessage);
