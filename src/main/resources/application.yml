@@ -91,3 +91,6 @@ spring:
 
 jwt:
   secret: mythologyteamprod
+
+email:
+  host: ${HOST}

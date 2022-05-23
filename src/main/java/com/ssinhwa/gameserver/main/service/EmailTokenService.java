@@ -4,6 +4,7 @@ import com.ssinhwa.gameserver.main.entity.EmailToken;
 import com.ssinhwa.gameserver.main.repository.EmailTokenRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,8 @@ public class EmailTokenService {
 
     private final EmailSenderService emailSenderService;
     private final EmailTokenRepository emailTokenRepository;
-
+    @Value("${jwt.secret}")
+    private final String email;
 
     public void createEmailConfirmationToken(String userId, String email) {
         EmailToken emailToken = new EmailToken(userId);
@@ -28,7 +30,7 @@ public class EmailTokenService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(email);
         mailMessage.setSubject("이메일 인증 요청 안내 메일입니다.");
-        mailMessage.setText("http://localhost:8080/api/confirm-email?token=" + emailToken.getId());
+        mailMessage.setText("http://" + email + "/api/confirm-email?token=" + emailToken.getId());
 
         emailSenderService.sendEmail(mailMessage);
         log.info("이메일 전송 : " + mailMessage);
