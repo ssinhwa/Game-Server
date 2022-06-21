@@ -61,7 +61,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void login(LoginDto loginDto) {
+    public String login(LoginDto loginDto) {
         Member member = memberRepository.findMemberByUsername(loginDto.getUsername());
         if (member == null) {
             throw new EntityNotFoundException("존재하지 않는 유저입니다.");
@@ -78,6 +78,7 @@ public class MemberServiceImpl implements MemberService {
         String token = tokenProvider.generateToken(member.getUsername());  // 토큰 생성해서 저장
         log.info("Token : " + token);
         redisService.setToken(token, member.getUsername()); // Redis 에 토큰 저장
+        return token;
     }
 
 

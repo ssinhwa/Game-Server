@@ -32,12 +32,13 @@ public class MemberController {
 
     @PostMapping("/login")
     public String login(@RequestBody LoginDto loginDto) {
+        String token = "Login Error";
         try {
-            memberService.login(loginDto);
+            token = memberService.login(loginDto);
         } catch (Exception e) {
             return e.getMessage();
         }
-        return "로그인 성공";
+        return "Token : " + token;
     }
 
     @PostMapping("/logout")

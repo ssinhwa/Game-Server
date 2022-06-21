@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public interface MemberService {
     public void signUp(UserDto userDto);
 
-    public void login(LoginDto loginDto);
+    public String login(LoginDto loginDto);
 
     public UserDto findMemberByUsername(String username);
 
