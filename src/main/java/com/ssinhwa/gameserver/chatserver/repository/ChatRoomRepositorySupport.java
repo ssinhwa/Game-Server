@@ -14,15 +14,18 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ChatRoomRepositorySupport {
 
+    private final ChatRoomRepository chatRoomRepository;
+
     public ChatRoom createChatRoom(String name) {
         log.info("Create Chat Room");
         String roomId = UUID.randomUUID().toString();
-        return new ChatRoom(roomId, name);
+        ChatRoom newChatRoom = new ChatRoom(roomId, name);
+        chatRoomRepository.save(newChatRoom);
+        return newChatRoom;
     }
 
     public void enterChatRoom(String roomId) {
         ChannelTopic channelTopic = new ChannelTopic(RedisConstants.REDIS_TOPIC);
-
     }
 
     /*

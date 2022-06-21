@@ -17,7 +17,7 @@ import java.util.Date;
 @Component
 @RequiredArgsConstructor
 public class TokenProvider {
-    private static final long TOKEN_EXPIRE_TIME = 1000L * 60;   // 유효시간은 1분
+    private static final long TOKEN_EXPIRE_TIME = 1000L * 60 * 60;   // 유효시간은 1분
 
     @Value("${jwt.secret}")
     private String secretKey;

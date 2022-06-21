@@ -44,10 +44,9 @@ public class ChatController {
         redisPublisher.publish(new ChannelTopic(RedisConstants.REDIS_TOPIC), messageDto);
     }
 
-    @PostMapping("/chat/message")
     @MessageMapping("/chat/message")
-    public void message(@RequestBody MessageDto message, @CookieValue("token") String token) {
-        String username = tokenProvider.getUserNameFromJwt(token);
+    public void message(@RequestBody MessageDto message) {
+        String username = message.getWriter();
         log.info("WebSocket Username : " + username);
         log.info(message.getMessage());
         chatMessageHistoryRepository.save(message);
