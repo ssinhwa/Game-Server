@@ -1,6 +1,6 @@
 package com.ssinhwa.gameserver;
 
-import com.ssinhwa.gameserver.chatserver.dto.MessageDto;
+import com.ssinhwa.gameserver.redisserver.dto.MessageDto;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
