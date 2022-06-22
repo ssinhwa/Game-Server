@@ -7,9 +7,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class ChatRoomDto {
-    private String roomId;
-    private String roomName;
+@NoArgsConstructor
+public class PlayerContinuousData {
+    private Integer playerId;
+    private Integer playerState;
+    private WPosition worldPosition;
+    private Float rotation;
 }

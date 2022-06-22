@@ -7,9 +7,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class ChatRoomDto {
-    private String roomId;
-    private String roomName;
+@NoArgsConstructor
+public class WPosition {
+    private Float x;
+    private Float y;
 }

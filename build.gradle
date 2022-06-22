@@ -33,6 +33,7 @@ dependencies {
     testImplementation("org.springframework.kafka:spring-kafka-test")
     // For JSON
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2.1'
+    implementation 'com.google.code.gson:gson:2.9.0'
 
     // Model mapper
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.0.0'
