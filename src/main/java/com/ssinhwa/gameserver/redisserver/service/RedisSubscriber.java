@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class RedisSubscriber implements MessageListener {
 
     private final ObjectMapper objectMapper;
-    private final RedisTemplate<String, MessageDto> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
     private final SimpMessageSendingOperations template;
 
 
@@ -28,6 +28,7 @@ public class RedisSubscriber implements MessageListener {
             log.info("Redis Subscriber 호출");
             String publishMessage = redisTemplate
                     .getStringSerializer().deserialize(message.getBody());
+            log.info("Publish Message : " + publishMessage);
             MessageDto messageDto = objectMapper.readValue(publishMessage, MessageDto.class);
             log.info("Redis Subscribe Message : " + messageDto.getMessage());
             template.convertAndSend("/sub/chat/room/" + messageDto.getRoomId(), messageDto.getMessage());

@@ -1,6 +1,5 @@
 package com.ssinhwa.gameserver.redisserver.config;
 
-import com.ssinhwa.gameserver.redisserver.dto.MessageDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,8 +38,8 @@ public class RedisConfig {
     // 어플리케이션에서 사용할 redisTemplate 설정
 
     @Bean
-    public RedisTemplate<String, MessageDto> redisTemplate() {
-        RedisTemplate<String, MessageDto> redisTemplate = new RedisTemplate<>();
+    public RedisTemplate<String, Object> redisTemplate() {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory());
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(String.class));
