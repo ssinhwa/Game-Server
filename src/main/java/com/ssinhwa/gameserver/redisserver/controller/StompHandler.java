@@ -21,7 +21,6 @@ public class StompHandler implements ChannelInterceptor {
     @Override
     public Message<?> preSend(Message<?> message, MessageChannel channel) {
         StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
-        log.info("StompHandler Message 실행 : " + message.toString());
         if (StompCommand.CONNECT == accessor.getCommand()) {
             if (!tokenProvider.validateToken(accessor.getFirstNativeHeader("token"))) {
                 throw new RuntimeException("토큰 값이 없습니다.");

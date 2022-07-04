@@ -35,8 +35,7 @@ public class PacketService {
     }
 
     public String jsonToString() {
-        JsonObject packetList = getPacketList();
-        return packetList.toString();
+        return getPacketList().toString();
     }
 
     public void saveContinuousData(PlayerContinuousData data) {

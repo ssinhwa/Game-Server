@@ -5,10 +5,12 @@ import com.ssinhwa.gameserver.redisserver.service.PacketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/game")
 @RequiredArgsConstructor
 @Slf4j
 public class PacketController {
@@ -22,8 +24,7 @@ public class PacketController {
 
     @GetMapping("/packet/test")
     public String packetToJson() {
-        String s = packetService.jsonToString();
-        return s;
+        return packetService.jsonToString();
     }
 
     @PostMapping("/packet/test")

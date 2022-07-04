@@ -25,12 +25,9 @@ public class RedisSubscriber implements MessageListener {
     public void onMessage(Message message, byte[] pattern) {
         try {
             // 발행된 데이터를 Deserialize
-            log.info("Redis Subscriber 호출");
             String publishMessage = redisTemplate
                     .getStringSerializer().deserialize(message.getBody());
-            log.info("Publish Message : " + publishMessage);
             MessageDto messageDto = objectMapper.readValue(publishMessage, MessageDto.class);
-            log.info("Redis Subscribe Message : " + messageDto.getMessage());
             template.convertAndSend("/sub/chat/room/" + messageDto.getRoomId(), messageDto.getMessage());
         } catch (JsonProcessingException e) {
             log.error(e.getMessage());

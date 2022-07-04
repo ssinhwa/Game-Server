@@ -22,13 +22,12 @@ public class Task {
     private final RedisDataSubscriber dataSubscriber;
     private final PacketService packetService;
 
-    // 0.1초마다 뿌려줄 것
+    // 0.1초마다 뿌려줄 것 -> 테스트용은 0.5초
     @Scheduled(fixedDelay = 100)
     public void scheduledPublish() throws InterruptedException {
         String json = packetService.jsonToString();
         redisMessageListenerContainer.addMessageListener(dataSubscriber, new ChannelTopic(RedisConstants.GAME_TOPIC));
         redisPublisher.publish(new ChannelTopic(RedisConstants.GAME_TOPIC), json);
         repository.deleteAll();
-        log.info("Fixed Task. Time : " + System.currentTimeMillis());
     }
 }
