@@ -13,5 +13,5 @@ public class PlayerContinuousData {
     private Integer playerId;
     private Integer playerState;
     private WPosition worldPosition;
-    private Float rotation;
+    private double rotation;
 }
