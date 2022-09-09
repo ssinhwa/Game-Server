@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WPosition {
-    private Float x;
-    private Float y;
+    private double x;
+    private double y;
 }

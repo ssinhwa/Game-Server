@@ -21,8 +21,7 @@ public class RedisPublisher {
 
 
     public void publish(ChannelTopic topic, String data) {
-        log.info("Topic : " + topic.getTopic());
-        log.info("Data : " + data);
+        log.info("Topic : " + topic.getTopic() + " Data : " + data);
         redisTemplate.convertAndSend(topic.getTopic(), data);
     }
 }

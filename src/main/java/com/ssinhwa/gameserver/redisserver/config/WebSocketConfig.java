@@ -25,7 +25,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.setApplicationDestinationPrefixes("/pub");
     }
 
-    // Stomp WebSocket Endpoint : /ws/stomp
+    // Stomp WebSocket Endpoint : /ws-stomp
     // Unity 에서 접속하려 하니 SockJS 를 빼야 했다.
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {

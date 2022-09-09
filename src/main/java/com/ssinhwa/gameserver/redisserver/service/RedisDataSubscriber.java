@@ -19,8 +19,7 @@ public class RedisDataSubscriber implements MessageListener {
     @Override
     public void onMessage(Message message, byte[] pattern) {
         // 발행된 데이터를 Deserialize
-        log.info("Redis Data Subscriber 호출");
-        log.info("Message : " + message.getBody());
-        template.convertAndSend("/sub/data", message.getBody());
+        template.convertAndSend("/sub/game", message.getBody());
+        log.info("Message : " + message);
     }
 }

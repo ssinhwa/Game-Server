@@ -2,11 +2,14 @@ package com.ssinhwa.gameserver.redisserver.repository;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.ssinhwa.gameserver.redisserver.dto.PlayerContinuousData;
 import com.ssinhwa.gameserver.redisserver.dto.WPosition;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,14 +30,22 @@ class MemoryPlayerContinuousDataRepositoryTest {
 
         repository.save(playerContinuousData1);
         repository.save(playerContinuousData2);
-        System.out.println("repository = " + repository);
-
         List<Map<String, PlayerContinuousData>> all = repository.getAll();
-        for (Map<String, PlayerContinuousData> map : all) {
-            System.out.println(map.get("playerContinuousData").getPlayerId());
-        }
+        JsonObject packetList = getPacketList(all);
+        System.out.println(packetList);
+    }
+
+    public JsonObject getPacketList(List<Map<String, PlayerContinuousData>> continuousDataList) {
         Gson gson = new Gson();
-        JsonElement jsonElement = gson.toJsonTree(all);
-        System.out.println("jsonElement = " + jsonElement);
+        JsonObject packetListJson = new JsonObject();
+        JsonElement continuousDataListJson = gson.toJsonTree(continuousDataList);
+        JsonElement periodicDataListJson = gson.toJsonTree(""); // periodicDataList 들어갈 자리
+        List<Map<String, JsonElement>> packetList = new ArrayList<>();
+        Map<String, JsonElement> map = new HashMap<>();
+        map.put("continuousDataList", continuousDataListJson);
+        map.put("periodicDataList", periodicDataListJson);
+        packetList.add(map);
+        packetListJson.add("packetList", gson.toJsonTree(packetList));
+        return packetListJson;
     }
 }
