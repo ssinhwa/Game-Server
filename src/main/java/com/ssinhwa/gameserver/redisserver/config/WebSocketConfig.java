@@ -30,7 +30,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws-stomp")
-                .setAllowedOriginPatterns("*");
+                .setAllowedOriginPatterns("*")
+                .withSockJS();
     }
 
     // StompHandler 가 WebSocket 앞단에서 Token 체크
