@@ -30,7 +30,7 @@ public class EmailToken {
     private boolean expired;
 
     @Column
-    private String memberId;
+    private Long memberId;
 
     @CreatedDate
     @Column(updatable = false)
@@ -39,7 +39,7 @@ public class EmailToken {
     @LastModifiedDate
     private LocalDateTime updatedDate;
 
-    public EmailToken(String memberId) {
+    public EmailToken(Long memberId) {
         this.memberId = memberId;
         this.expirationDate = LocalDateTime.now().plusMinutes(EMAIL_TOKEN_EXPIRATION_TIME);
         this.expired = false;

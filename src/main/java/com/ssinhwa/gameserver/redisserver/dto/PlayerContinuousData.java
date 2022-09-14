@@ -10,8 +10,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlayerContinuousData {
-    private Integer playerId;
-    private Integer playerState;
-    private WPosition worldPosition;
-    private double rotation;
+    private Integer i; // player Id
+    private Integer s; // State
+    private WPosition p;    // Position
+    private double r;   // Rotation
 }

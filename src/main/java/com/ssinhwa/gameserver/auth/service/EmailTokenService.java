@@ -24,7 +24,7 @@ public class EmailTokenService {
     @Value("${email.host}")
     private String emailLink;
 
-    public void createEmailConfirmationToken(String userId, String email) {
+    public void createEmailConfirmationToken(Long userId, String email) {
         EmailToken emailToken = new EmailToken(userId);
         emailTokenRepository.save(emailToken);
 

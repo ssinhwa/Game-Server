@@ -1,6 +1,7 @@
 package com.ssinhwa.gameserver.auth.service;
 
 import com.ssinhwa.gameserver.auth.dto.LoginDto;
+import com.ssinhwa.gameserver.auth.dto.LoginUserDto;
 import com.ssinhwa.gameserver.auth.dto.UserDto;
 import com.ssinhwa.gameserver.auth.entity.EmailToken;
 import com.ssinhwa.gameserver.auth.entity.Member;
@@ -52,7 +53,7 @@ public class MemberServiceImpl implements MemberService {
     public void signUp(UserDto userDto) {
         Member findMember = memberRepository.findMemberByUsername(userDto.getUsername());
         if (findMember != null) {
-            throw new EntityExistsException("이미 존재하는 유저입니다.");
+            throw new EntityExistsException("Error : 이미 존재하는 유저입니다.");
         }
         String password = passwordEncoder.encode(userDto.getPassword());
         Member member = new Member(userDto.getUsername(), password, userDto.getEmail());
@@ -61,24 +62,25 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String login(LoginDto loginDto) {
+    public LoginUserDto login(LoginDto loginDto) {
         Member member = memberRepository.findMemberByUsername(loginDto.getUsername());
         if (member == null) {
-            throw new EntityNotFoundException("존재하지 않는 유저입니다.");
+            throw new EntityNotFoundException("Error : 존재하지 않는 유저입니다.");
         }
 
         if (!passwordEncoder.matches(loginDto.getPassword(), member.getPassword())) {
-            throw new EntityNotFoundException("일치하지 않는 패스워드 입니다.");
+            throw new EntityNotFoundException("Error : 일치하지 않는 패스워드 입니다.");
         }
 
         if (!member.isEmailVerified()) {
-            throw new EntityNotFoundException("이메일 인증이 완료되지 않았습니다.");
+            throw new EntityNotFoundException("Error : 이메일 인증이 완료되지 않았습니다.");
         }
 
         String token = tokenProvider.generateToken(member.getUsername());  // 토큰 생성해서 저장
         log.info("Token : " + token);
         redisService.setToken(token, member.getUsername()); // Redis 에 토큰 저장
-        return token;
+
+        return new LoginUserDto(token, member.getId());
     }
 
 

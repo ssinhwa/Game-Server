@@ -30,8 +30,9 @@ class MemoryPlayerContinuousDataRepositoryTest {
 
         repository.save(playerContinuousData1);
         repository.save(playerContinuousData2);
-        List<Map<String, PlayerContinuousData>> all = repository.getAll();
-        JsonObject packetList = getPacketList(all);
+        JsonElement all = repository.getAll();
+        JsonObject packetList = new JsonObject();
+        packetList.add("cdl", all);
         System.out.println(packetList);
     }
 

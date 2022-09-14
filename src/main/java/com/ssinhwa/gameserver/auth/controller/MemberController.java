@@ -1,6 +1,7 @@
 package com.ssinhwa.gameserver.auth.controller;
 
 import com.ssinhwa.gameserver.auth.dto.LoginDto;
+import com.ssinhwa.gameserver.auth.dto.LoginUserDto;
 import com.ssinhwa.gameserver.auth.dto.UserDto;
 import com.ssinhwa.gameserver.auth.service.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -32,13 +33,16 @@ public class MemberController {
 
     @PostMapping("/login")
     public String login(@RequestBody LoginDto loginDto) {
-        String token = "Login Error";
+        String token = "";
+        Long playerId = 0L;
         try {
-            token = memberService.login(loginDto);
+            LoginUserDto user = memberService.login(loginDto);
+            token = user.getToken();
+            playerId = user.getPlayerId();
         } catch (Exception e) {
             return e.getMessage();
         }
-        return "Token : " + token;
+        return "Token : " + token + " ,playerId : " + playerId;
     }
 
     @PostMapping("/logout")
