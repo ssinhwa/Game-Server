@@ -42,7 +42,7 @@ public class MemberController {
         } catch (Exception e) {
             return e.getMessage();
         }
-        return "Token : " + token + " ,playerId : " + playerId;
+        return token + "," + playerId;
     }
 
     @PostMapping("/logout")
