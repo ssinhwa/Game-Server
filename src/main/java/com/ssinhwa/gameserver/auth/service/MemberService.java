@@ -1,6 +1,7 @@
 package com.ssinhwa.gameserver.auth.service;
 
 import com.ssinhwa.gameserver.auth.dto.LoginDto;
+import com.ssinhwa.gameserver.auth.dto.LoginUserDto;
 import com.ssinhwa.gameserver.auth.dto.UserDto;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 public interface MemberService {
     public void signUp(UserDto userDto);
 
-    public String login(LoginDto loginDto);
+    public LoginUserDto login(LoginDto loginDto);
 
     public UserDto findMemberByUsername(String username);
 

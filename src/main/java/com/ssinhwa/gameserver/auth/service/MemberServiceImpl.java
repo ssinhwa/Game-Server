@@ -1,6 +1,7 @@
 package com.ssinhwa.gameserver.auth.service;
 
 import com.ssinhwa.gameserver.auth.dto.LoginDto;
+import com.ssinhwa.gameserver.auth.dto.LoginUserDto;
 import com.ssinhwa.gameserver.auth.dto.UserDto;
 import com.ssinhwa.gameserver.auth.entity.EmailToken;
 import com.ssinhwa.gameserver.auth.entity.Member;
@@ -61,7 +62,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String login(LoginDto loginDto) {
+    public LoginUserDto login(LoginDto loginDto) {
         Member member = memberRepository.findMemberByUsername(loginDto.getUsername());
         if (member == null) {
             throw new EntityNotFoundException("존재하지 않는 유저입니다.");
@@ -78,7 +79,8 @@ public class MemberServiceImpl implements MemberService {
         String token = tokenProvider.generateToken(member.getUsername());  // 토큰 생성해서 저장
         log.info("Token : " + token);
         redisService.setToken(token, member.getUsername()); // Redis 에 토큰 저장
-        return token;
+
+        return new LoginUserDto(token, member.getId());
     }
 
 
