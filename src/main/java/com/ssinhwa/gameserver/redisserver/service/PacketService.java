@@ -3,7 +3,7 @@ package com.ssinhwa.gameserver.redisserver.service;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.ssinhwa.gameserver.redisserver.dto.PlayerContinuousData;
+import com.ssinhwa.gameserver.redisserver.entity.PlayerContinuousData;
 import com.ssinhwa.gameserver.redisserver.repository.MemoryPeriodicDataRepository;
 import com.ssinhwa.gameserver.redisserver.repository.MemoryPlayerContinuousDataRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.ssinhwa.gameserver.redisserver.controller;
 
-import com.ssinhwa.gameserver.redisserver.dto.PlayerContinuousData;
+import com.ssinhwa.gameserver.redisserver.entity.PlayerContinuousData;
 import com.ssinhwa.gameserver.redisserver.service.PacketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
