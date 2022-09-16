@@ -7,4 +7,6 @@ public interface PeriodicDataRepository {
     public void save(PeriodicData data);
 
     public JsonElement getAll();
+
+    public void deleteAll();
 }

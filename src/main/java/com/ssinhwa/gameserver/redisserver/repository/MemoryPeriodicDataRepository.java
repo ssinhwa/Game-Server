@@ -21,4 +21,9 @@ public class MemoryPeriodicDataRepository implements PeriodicDataRepository {
     public JsonElement getAll() {
         return new Gson().toJsonTree(memoryPeriodicDataRepository);
     }
+
+    @Override
+    public void deleteAll() {
+        memoryPeriodicDataRepository.clear();
+    }
 }

@@ -7,4 +7,6 @@ public interface PlayerContinuousDataRepository {
     public void save(PlayerContinuousData data);
 
     public JsonElement getAll();
+
+    public void deleteAll();
 }
