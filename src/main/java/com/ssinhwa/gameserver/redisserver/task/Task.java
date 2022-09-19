@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,8 +25,7 @@ public class Task {
     private final PacketService packetService;
 
     // 0.1초마다 뿌려줄 것 -> 테스트용은 0.5초
-
-    // @Scheduled(fixedDelay = 60)
+    @Scheduled(fixedDelay = 60)
     public void scheduledPublish() throws InterruptedException {
         String json = packetService.jsonToString();
         redisMessageListenerContainer.addMessageListener(dataSubscriber, new ChannelTopic(RedisConstants.GAME_TOPIC));
