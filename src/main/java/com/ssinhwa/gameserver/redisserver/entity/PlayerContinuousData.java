@@ -1,4 +1,4 @@
-package com.ssinhwa.gameserver.redisserver.dto;
+package com.ssinhwa.gameserver.redisserver.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

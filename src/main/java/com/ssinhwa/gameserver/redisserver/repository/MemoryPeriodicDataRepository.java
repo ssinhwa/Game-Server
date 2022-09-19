@@ -2,7 +2,7 @@ package com.ssinhwa.gameserver.redisserver.repository;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.ssinhwa.gameserver.redisserver.dto.PeriodicData;
+import com.ssinhwa.gameserver.redisserver.entity.PeriodicData;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -20,5 +20,10 @@ public class MemoryPeriodicDataRepository implements PeriodicDataRepository {
     @Override
     public JsonElement getAll() {
         return new Gson().toJsonTree(memoryPeriodicDataRepository);
+    }
+
+    @Override
+    public void deleteAll() {
+        memoryPeriodicDataRepository.clear();
     }
 }

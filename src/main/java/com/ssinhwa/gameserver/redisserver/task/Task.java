@@ -1,6 +1,7 @@
 package com.ssinhwa.gameserver.redisserver.task;
 
 import com.ssinhwa.gameserver.redisserver.config.RedisConstants;
+import com.ssinhwa.gameserver.redisserver.repository.MemoryPeriodicDataRepository;
 import com.ssinhwa.gameserver.redisserver.repository.MemoryPlayerContinuousDataRepository;
 import com.ssinhwa.gameserver.redisserver.service.PacketService;
 import com.ssinhwa.gameserver.redisserver.service.RedisDataSubscriber;
@@ -16,7 +17,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @RequiredArgsConstructor
 public class Task {
-    private final MemoryPlayerContinuousDataRepository repository;
+    private final MemoryPlayerContinuousDataRepository memoryPlayerContinuousDataRepository;
+    private final MemoryPeriodicDataRepository memoryPeriodicDataRepository;
     private final RedisPublisher redisPublisher;
     private final RedisMessageListenerContainer redisMessageListenerContainer;
     private final RedisDataSubscriber dataSubscriber;
@@ -28,6 +30,7 @@ public class Task {
         String json = packetService.jsonToString();
         redisMessageListenerContainer.addMessageListener(dataSubscriber, new ChannelTopic(RedisConstants.GAME_TOPIC));
         redisPublisher.publish(new ChannelTopic(RedisConstants.GAME_TOPIC), json);
-        repository.deleteAll();
+        memoryPlayerContinuousDataRepository.deleteAll();
+        memoryPeriodicDataRepository.deleteAll();
     }
 }

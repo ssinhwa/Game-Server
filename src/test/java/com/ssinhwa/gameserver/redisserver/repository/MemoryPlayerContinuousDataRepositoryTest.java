@@ -3,8 +3,8 @@ package com.ssinhwa.gameserver.redisserver.repository;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.ssinhwa.gameserver.redisserver.dto.PlayerContinuousData;
-import com.ssinhwa.gameserver.redisserver.dto.WPosition;
+import com.ssinhwa.gameserver.redisserver.entity.PlayerContinuousData;
+import com.ssinhwa.gameserver.redisserver.entity.WPosition;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
