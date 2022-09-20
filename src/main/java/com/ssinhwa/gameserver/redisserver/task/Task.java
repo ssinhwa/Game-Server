@@ -1,8 +1,8 @@
 package com.ssinhwa.gameserver.redisserver.task;
 
 import com.ssinhwa.gameserver.redisserver.config.RedisConstants;
-import com.ssinhwa.gameserver.redisserver.repository.MemoryPeriodicDataRepository;
-import com.ssinhwa.gameserver.redisserver.repository.MemoryPlayerContinuousDataRepository;
+import com.ssinhwa.gameserver.redisserver.repository.PeriodicDataRepositoryImpl;
+import com.ssinhwa.gameserver.redisserver.repository.PlayerContinuousDataRepositoryImpl;
 import com.ssinhwa.gameserver.redisserver.service.PacketService;
 import com.ssinhwa.gameserver.redisserver.service.RedisDataSubscriber;
 import com.ssinhwa.gameserver.redisserver.service.RedisPublisher;
@@ -17,8 +17,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @RequiredArgsConstructor
 public class Task {
-    private final MemoryPlayerContinuousDataRepository memoryPlayerContinuousDataRepository;
-    private final MemoryPeriodicDataRepository memoryPeriodicDataRepository;
+    private final PlayerContinuousDataRepositoryImpl memoryPlayerContinuousDataRepository;
+    private final PeriodicDataRepositoryImpl memoryPeriodicDataRepository;
     private final RedisPublisher redisPublisher;
     private final RedisMessageListenerContainer redisMessageListenerContainer;
     private final RedisDataSubscriber dataSubscriber;

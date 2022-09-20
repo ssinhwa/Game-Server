@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class MemoryPeriodicDataRepository implements PeriodicDataRepository {
-    private static List<PeriodicData> memoryPeriodicDataRepository = new ArrayList<>();
+public class PeriodicDataRepositoryImpl implements PeriodicDataRepository {
+    private static final List<PeriodicData> memoryPeriodicDataRepository = new ArrayList<>();
 
     @Override
     public void save(PeriodicData data) {

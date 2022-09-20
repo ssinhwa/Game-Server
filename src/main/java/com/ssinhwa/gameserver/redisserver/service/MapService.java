@@ -1,21 +1,25 @@
 package com.ssinhwa.gameserver.redisserver.service;
 
+import com.ssinhwa.gameserver.redisserver.repository.MapRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class MapService {
-    private final StringRedisTemplate redisTemplate;
+    private final MapRepository mapRepository;
 
     public String getMapById(String id) {
-        return redisTemplate.opsForValue().get(id);
+        return mapRepository.getMapById(id);
     }
 
     public void addMap(String map, String id) {
-        redisTemplate.opsForValue().set(id, map);
+        mapRepository.save(map, id);
+    }
+
+    public void addMemory(String map, String id) {
+        mapRepository.memorySave(map, id);
     }
 }

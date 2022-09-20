@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.ssinhwa.gameserver.redisserver.entity.PlayerContinuousData;
-import com.ssinhwa.gameserver.redisserver.repository.MemoryPeriodicDataRepository;
-import com.ssinhwa.gameserver.redisserver.repository.MemoryPlayerContinuousDataRepository;
+import com.ssinhwa.gameserver.redisserver.repository.PeriodicDataRepository;
+import com.ssinhwa.gameserver.redisserver.repository.PlayerContinuousDataRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PacketService {
     private final Gson gson;
-    private final MemoryPlayerContinuousDataRepository playerContinuousDataRepository;
-    private final MemoryPeriodicDataRepository periodicDataRepository;
+    private final PlayerContinuousDataRepository playerContinuousDataRepository;
+    private final PeriodicDataRepository periodicDataRepository;
 
     public JsonObject getPacketList() {
         JsonElement continuousDataJson = playerContinuousDataRepository.getAll();

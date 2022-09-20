@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class MemoryPlayerContinuousDataRepository implements PlayerContinuousDataRepository {
-    private static List<PlayerContinuousData> memoryPlayerContinuousDataRepository = new ArrayList<>();
+public class PlayerContinuousDataRepositoryImpl implements PlayerContinuousDataRepository {
+    private static final List<PlayerContinuousData> memoryPlayerContinuousDataRepository = new ArrayList<>();
 
     @Override
     public void save(PlayerContinuousData data) {
