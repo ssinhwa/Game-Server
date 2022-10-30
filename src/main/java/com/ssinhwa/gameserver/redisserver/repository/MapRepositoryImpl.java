@@ -14,14 +14,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MapRepositoryImpl implements MapRepository {
     private static final List<String> mapList = new ArrayList<>();
-    private static int count = 0;
     private final StringRedisTemplate redisTemplate;
 
     // 서버 시작 시 Redis 에서 Map Data 갖고 와서 Setting 한다.
     @PostConstruct
     public void init() {
         mapList.add(" ");
-        for (int i = 1; i <= 16; i++) {
+        for (int i = 0; i <= 33; i++) {
             String key = "Map" + String.valueOf(i);
             String map = redisTemplate.opsForValue().get(key);
             mapList.add(map);
@@ -40,7 +39,6 @@ public class MapRepositoryImpl implements MapRepository {
     public void memorySave(String map, String id) {
         int idx = Integer.parseInt(id);
         mapList.set(idx, map);
-        count++;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.ssinhwa.gameserver.redisserver.service;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.ssinhwa.gameserver.redisserver.entity.PlayerContinuousData;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class PacketService {
-    private final Gson gson;
     private final PlayerContinuousDataRepository playerContinuousDataRepository;
     private final PeriodicDataRepository periodicDataRepository;
 
