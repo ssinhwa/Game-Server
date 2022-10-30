@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -16,6 +13,7 @@ import javax.persistence.Id;
 public class Member {
     @Id
     @GeneratedValue
+    @Column(name = "member_id")
     private Long id;
 
     @Column(nullable = false, length = 20, unique = true)
@@ -34,6 +32,9 @@ public class Member {
 
     private String token;
 
+    @OneToOne
+    @JoinColumn(name = "status_id")
+    private PlayerStatus playerStatus;
 
     public Member(String username, String password, String email) {
         this.username = username;
