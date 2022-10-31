@@ -15,7 +15,7 @@ import java.util.Map;
 
 class MemoryPlayerContinuousDataRepositoryTest {
 
-    PlayerContinuousDataRepositoryImpl repository = new PlayerContinuousDataRepositoryImpl();
+    PlayerContinuousDataRepositoryImpl repository;
 
     @AfterEach
     public void afterEach() {
