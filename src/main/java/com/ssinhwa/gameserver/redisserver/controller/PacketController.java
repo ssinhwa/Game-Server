@@ -7,6 +7,7 @@ import com.ssinhwa.gameserver.redisserver.service.PdlService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,11 @@ public class PacketController {
     @MessageMapping("/periodicData")
     public void sendPeriodicData(@RequestBody PeriodicData periodicData) {
         pdlService.save(periodicData);
-        log.info("Periodic Data 추가");
+    }
+
+    // test 용
+    @PostMapping("/packet/test")
+    public void saveContinuousData(@RequestBody PlayerContinuousData playerContinuousData) {
+        packetService.saveContinuousData(playerContinuousData);
     }
 }
