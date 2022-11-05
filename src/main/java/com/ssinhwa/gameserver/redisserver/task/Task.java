@@ -35,7 +35,5 @@ public class Task {
         redisPublisher.publish(new ChannelTopic(RedisConstants.GAME_TOPIC), json);
         packetService.deletePcdAll();
         packetService.deletePddAll();
-        // memoryPlayerContinuousDataRepository.deleteAll();
-        // memoryPeriodicDataRepository.deleteAll();
     }
 }

@@ -26,8 +26,6 @@ public class RedisService {
 
     public void delToken(String token) {
         Boolean delete = redisTemplate.delete(token);
-        log.info("Delete Success : " + delete);
-        log.info("Logout : " + token);
     }
 
 }
